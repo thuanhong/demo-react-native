@@ -2,9 +2,11 @@ import React, {useState} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {View, Text, TouchableWithoutFeedback, StyleSheet} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const ButtonGroup = () => {
   const [likeStatus, setLikeStatus] = useState(false);
+  const navigation = useNavigation();
   return (
     <View style={styles.cardBtn}>
       <TouchableWithoutFeedback
@@ -26,7 +28,7 @@ const ButtonGroup = () => {
           </Text>
         </View>
       </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate('Comment')}>
         <View style={[styles.btnStyle, styles.inactive]}>
           <MaterialCommunityIcons
             name="comment-outline"

@@ -1,39 +1,15 @@
-import React, {useMemo, useEffect, useContext} from 'react';
-import {
-  NavigationContainer,
-  useNavigation,
-  DrawerActions,
-} from '@react-navigation/native';
+import React, {useMemo, useEffect} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import AppTabNavigation from './components/AppTabNavigation';
-import AuthenticateScreen from './components/AuthenticateScreen';
+import AuthenticateScreen from './components/AuthenticateScreen.js';
 import AsyncStorage from '@react-native-community/async-storage';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from '@react-navigation/drawer';
-import {Image, Button} from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MainPageDrawerNavigation, {
+  HeaderLeft,
+} from './components/DrawerScreen/MainPageDrawerNavigation';
 
 export const AuthContext = React.createContext();
 
 const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
-
-const HeaderLeft = () => {
-  const navigation = useNavigation();
-  return (
-    <MaterialCommunityIcons.Button
-      name="menu"
-      size={25}
-      onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-      backgroundColor="transparent"
-      color="#5F6870"
-    />
-  );
-};
 
 const App = () => {
   const [state, dispatch] = React.useReducer(
@@ -144,29 +120,6 @@ const App = () => {
         </Stack.Navigator>
       </AuthContext.Provider>
     </NavigationContainer>
-  );
-};
-
-const CustomDrawerContent = props => {
-  const {signOut} = useContext(AuthContext);
-  return (
-    <DrawerContentScrollView {...props}>
-      <Image
-        style={{resizeMode: 'stretch', width: '100%', height: 200}}
-        source={require('../assets/drawer.jpg')}
-      />
-      <DrawerItemList {...props} />
-      <Button title="Logout" onPress={signOut} />
-    </DrawerContentScrollView>
-  );
-};
-
-const MainPageDrawerNavigation = () => {
-  return (
-    <Drawer.Navigator
-      drawerContent={props => <CustomDrawerContent {...props} />}>
-      <Drawer.Screen name="Home" component={AppTabNavigation} />
-    </Drawer.Navigator>
   );
 };
 

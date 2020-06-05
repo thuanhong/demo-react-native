@@ -1,12 +1,10 @@
 import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {View, Text, FlatList, SafeAreaView} from 'react-native';
-import CardComponent from './CardComponent';
+import HomeScreen from './HomeScreen/HomeScreen';
+import SettingScreen from './SettingScreen/SettingScreen';
 
 const Tab = createMaterialTopTabNavigator();
-
-const DATA = require('../../assets/MOCK_DATA.json');
 
 const AppTabNavigation = () => {
   return (
@@ -37,28 +35,6 @@ const AppTabNavigation = () => {
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Settings" component={SettingScreen} />
     </Tab.Navigator>
-  );
-};
-
-const SettingScreen = () => {
-  return (
-    <View>
-      <Text>Setting</Text>
-      <MaterialCommunityIcons name={'home'} size={20} color={'#215e8d'} />
-    </View>
-  );
-};
-
-const HomeScreen = () => {
-  return (
-    <SafeAreaView>
-      <FlatList
-        data={DATA}
-        renderItem={({item}) => {
-          return <CardComponent item={item} />;
-        }}
-      />
-    </SafeAreaView>
   );
 };
 

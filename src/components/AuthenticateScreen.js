@@ -13,6 +13,7 @@ import {
   Text,
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {AuthContext} from '../App';
 
 const width = Dimensions.get('window').width;
@@ -20,6 +21,8 @@ const width = Dimensions.get('window').width;
 const AuthenticateScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const [visible, setVisible] = useState(true);
 
   const {signIn} = useContext(AuthContext);
 
@@ -52,10 +55,19 @@ const AuthenticateScreen = () => {
                   onChangeText={setPassword}
                   style={styles.input}
                   value={password}
-                  secureTextEntry='true'
+                  secureTextEntry={visible}
                   placeholderTextColor="white"
                   place
                 />
+                <TouchableWithoutFeedback
+                  onPress={() => setVisible(!visible)}
+                  >
+                  <MaterialCommunityIcons
+                    name={visible ? 'eye-off' : 'eye'}
+                    size={25}
+                    style={styles.visibleIcon}
+                  />
+                </TouchableWithoutFeedback>
               </View>
             </View>
             <View style={styles.buttonLogin}>
@@ -152,6 +164,11 @@ const styles = StyleSheet.create({
   },
   space: {
     flex: 1,
+  },
+  visibleIcon: {
+    position: 'absolute',
+    right: 0,
+    bottom: 30,
   },
 });
 
