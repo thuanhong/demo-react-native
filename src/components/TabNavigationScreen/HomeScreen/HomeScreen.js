@@ -7,12 +7,14 @@ const Stack = createStackNavigator();
 
 const HomeScreen = () => {
   return (
-    <Stack.Navigator
-
-    >
-      <Stack.Screen name="NewFeed" component={NewFeedScreen} options={{
-        headerShown: false,
-      }} />
+    <Stack.Navigator mode="modal">
+      <Stack.Screen
+        name="NewFeed"
+        component={NewFeedScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen name="Comment" component={CommentScreen} />
     </Stack.Navigator>
   );

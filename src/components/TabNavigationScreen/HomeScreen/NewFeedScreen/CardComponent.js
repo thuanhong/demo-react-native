@@ -8,7 +8,7 @@ const CardComponent = props => {
   const {item} = props;
   return (
     <View style={styles.cardComponentStyle}>
-      <View key={item.id} style={styles.listTile}>
+      <View style={styles.listTile}>
         <View style={styles.imgContainer}>
           <Image
             source={require('../../../../../assets/react-native-logo.png')}
@@ -48,7 +48,7 @@ const CardComponent = props => {
         }}
       />
 
-      <ButtonGroup />
+      <ButtonGroup comment={item.comment} />
     </View>
   );
 };

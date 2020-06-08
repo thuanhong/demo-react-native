@@ -1,11 +1,19 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {FlatList, SafeAreaView} from 'react-native';
+import CardComment from './CardComment';
 
-const CommentScreen = () => {
+const CommentScreen = ({route}) => {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>CommentScreen</Text>
-    </View>
+    <SafeAreaView>
+      <FlatList
+        data={route.params.comment}
+        renderItem={({item, index}) => {
+          return (
+            <CardComment key={index} name={item.name} comment={item.comment} />
+          );
+        }}
+      />
+    </SafeAreaView>
   );
 };
 

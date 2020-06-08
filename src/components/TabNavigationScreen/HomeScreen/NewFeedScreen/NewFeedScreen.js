@@ -10,7 +10,7 @@ const NewFeedScreen = () => {
       <FlatList
         data={DATA}
         renderItem={({item}) => {
-          return <CardComponent item={item} />;
+          return <CardComponent key={item.id} item={item} />;
         }}
       />
     </SafeAreaView>
