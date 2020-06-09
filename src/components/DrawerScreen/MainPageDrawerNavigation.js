@@ -1,9 +1,12 @@
 import React from 'react';
 import {useNavigation, DrawerActions} from '@react-navigation/native';
 import AppTabNavigation from '../TabNavigationScreen/AppTabNavigation';
+import ActivityLogScreen from '../ActivityLogScreen/ActivityLogScreen';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import CustomDrawerContent from './CustomDrawerContent';
+import {Provider} from 'mobx-react';
+import store from '../Store';
 
 const Drawer = createDrawerNavigator();
 
@@ -22,10 +25,13 @@ export const HeaderLeft = () => {
 
 const MainPageDrawerNavigation = () => {
   return (
-    <Drawer.Navigator
-      drawerContent={props => <CustomDrawerContent {...props} />}>
-      <Drawer.Screen name="Home" component={AppTabNavigation} />
-    </Drawer.Navigator>
+    <Provider store={store}>
+      <Drawer.Navigator
+        drawerContent={props => <CustomDrawerContent {...props} />}>
+        <Drawer.Screen name="Home" component={AppTabNavigation} />
+        <Drawer.Screen name="Activity" component={ActivityLogScreen} />
+      </Drawer.Navigator>
+    </Provider>
   );
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import {FlatList, SafeAreaView} from 'react-native';
 import CardComment from './CardComment';
+import InputCommentComponent from './InputCommentComponent';
 
 const CommentScreen = ({route}) => {
   return (
@@ -13,6 +14,7 @@ const CommentScreen = ({route}) => {
           );
         }}
       />
+      <InputCommentComponent item={route.params.item} />
     </SafeAreaView>
   );
 };

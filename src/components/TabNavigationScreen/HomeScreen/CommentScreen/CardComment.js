@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet, TouchableHighlight} from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 
 const CardComment = ({name, comment}) => {
   return (
@@ -10,15 +10,15 @@ const CardComment = ({name, comment}) => {
       />
       <View style={styles.commentContent}>
         <Text style={styles.commentatorName}>{name}</Text>
-        <Text>{comment}</Text>
-      </View>
-      <View>
-        <TouchableHighlight onPress={() => {}}>
-          <Text>Like</Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={() => {}}>
-          <Text>Reply</Text>
-        </TouchableHighlight>
+        <Text multiline>{comment}</Text>
+        <View style={styles.cardCommentBtn}>
+          <TouchableOpacity onPress={() => {}}>
+            <Text style={styles.textStyle}>Like</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => {}}>
+            <Text style={styles.textStyle}>Reply</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -43,6 +43,16 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: 'white',
     padding: 20,
+    width: '85%',
+  },
+  cardCommentBtn: {
+    flexDirection: 'row',
+    padding: 5,
+  },
+  textStyle: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginHorizontal: 5,
   },
 });
 

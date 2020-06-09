@@ -48,7 +48,7 @@ const CardComponent = props => {
         }}
       />
 
-      <ButtonGroup comment={item.comment} />
+      <ButtonGroup item={item} />
     </View>
   );
 };

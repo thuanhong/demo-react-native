@@ -3,14 +3,28 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {View, Text, TouchableWithoutFeedback, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {inject, observer} from 'mobx-react';
 
-const ButtonGroup = ({comment}) => {
+const ButtonGroup = props => {
   const [likeStatus, setLikeStatus] = useState(false);
   const navigation = useNavigation();
+  const {item} = props;
+
+  const {updateLog, removeSpecifyLogItem} = props.store;
   return (
     <View style={styles.cardBtn}>
       <TouchableWithoutFeedback
         onPress={() => {
+          if (likeStatus) {
+            removeSpecifyLogItem(item.id);
+          } else {
+            updateLog({
+              id: item.id,
+              title: item.title,
+              sub_title: item.sub_title,
+              status: 'likes',
+            });
+          }
           setLikeStatus(!likeStatus);
         }}>
         <View style={styles.btnStyle}>
@@ -31,7 +45,13 @@ const ButtonGroup = ({comment}) => {
       <TouchableWithoutFeedback
         onPress={() =>
           navigation.navigate('Comment', {
-            comment: comment,
+            comment: item.comment,
+            item: {
+              id: item.id,
+              title: item.title,
+              sub_title: item.sub_title,
+              status: 'commented',
+            },
           })
         }>
         <View style={[styles.btnStyle, styles.inactive]}>
@@ -77,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ButtonGroup;
+export default inject('store')(observer(ButtonGroup));
