@@ -1,0 +1,1 @@
+../../../../../node_modules/react-native-alert-message/ios/AlertMessage-Bridging-Header.h

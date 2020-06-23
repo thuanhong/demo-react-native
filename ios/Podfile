@@ -80,6 +80,9 @@ target 'ReactNative' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
 
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'ReactNativeTests' do
     inherit! :complete
     # Pods for testing

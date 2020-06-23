@@ -1,0 +1,6 @@
+module react_native_alert_message {
+  umbrella header "react-native-alert-message-umbrella.h"
+
+  export *
+  module * { export * }
+}

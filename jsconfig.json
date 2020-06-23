@@ -3,5 +3,5 @@
       "experimentalDecorators": true,
       "baseUrl": "src", // This must be specified if "paths" is.
     },
-    "include": ["src"]
+    "include": ["src", "node_modules/react-native-alert-message"]
 }
