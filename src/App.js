@@ -98,7 +98,7 @@ const App = () => {
             headerShown: false,
           }}
         >
-          {state.userToken == null ? (
+          {state.userToken != null ? (
             <>
               <Stack.Screen name="Splash" component={SplashScreen} />
               <Stack.Screen name="Auth" component={AuthenticateScreen} />
