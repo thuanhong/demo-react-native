@@ -1,11 +1,10 @@
-import React, {useMemo, useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import AuthenticateScreen from './components/AuthenticateScreen.js';
-import AsyncStorage from '@react-native-community/async-storage';
-import MainPageDrawerNavigation, {
-  HeaderLeft,
-} from './components/DrawerScreen/MainPageDrawerNavigation';
+import React, { useMemo, useEffect } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import AuthenticateScreen from "./components/Auth/AuthenticateScreen.js";
+import AsyncStorage from "@react-native-community/async-storage";
+import MainPageDrawerNavigation from "./components/DrawerScreen/MainPageDrawerNavigation";
+import SplashScreen from "./components/SplashScreen";
 
 export const AuthContext = React.createContext();
 
@@ -15,19 +14,19 @@ const App = () => {
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
       switch (action.type) {
-        case 'RESTORE_TOKEN':
+        case "RESTORE_TOKEN":
           return {
             ...prevState,
             userToken: action.token,
             isLoading: false,
           };
-        case 'SIGN_IN':
+        case "SIGN_IN":
           return {
             ...prevState,
             isSignout: false,
             userToken: action.token,
           };
-        case 'SIGN_OUT':
+        case "SIGN_OUT":
           return {
             ...prevState,
             isSignout: true,
@@ -39,7 +38,7 @@ const App = () => {
       isLoading: true,
       isSignout: false,
       userToken: null,
-    },
+    }
   );
 
   useEffect(() => {
@@ -48,7 +47,7 @@ const App = () => {
       let userToken;
 
       try {
-        userToken = await AsyncStorage.getItem('userToken');
+        userToken = await AsyncStorage.getItem("userToken");
       } catch (e) {
         // Restoring token failed
       }
@@ -57,7 +56,7 @@ const App = () => {
 
       // This will switch to the App screen or Auth screen and this loading
       // screen will be unmounted and thrown away.
-      dispatch({type: 'RESTORE_TOKEN', token: userToken});
+      dispatch({ type: "RESTORE_TOKEN", token: userToken });
     };
 
     bootstrapAsync();
@@ -65,57 +64,47 @@ const App = () => {
 
   const authContext = useMemo(
     () => ({
-      signIn: async data => {
+      signIn: async (data) => {
         // In a production app, we need to send some data (usually username, password) to server and get a token
         // We will also need to handle errors if sign in failed
         // After getting token, we need to persist the token using `AsyncStorage`
         // In the example, we'll use a dummy token
 
-        dispatch({type: 'SIGN_IN', token: 'dummy-auth-token'});
+        dispatch({ type: "SIGN_IN", token: "dummy-auth-token" });
       },
-      signOut: () => dispatch({type: 'SIGN_OUT'}),
-      signUp: async data => {
+      signOut: () => dispatch({ type: "SIGN_OUT" }),
+      signUp: async (data) => {
         // In a production app, we need to send user data to server and get a token
         // We will also need to handle errors if sign up failed
         // After getting token, we need to persist the token using `AsyncStorage`
         // In the example, we'll use a dummy token
 
-        dispatch({type: 'SIGN_IN', token: 'dummy-auth-token'});
+        dispatch({ type: "SIGN_IN", token: "dummy-auth-token" });
       },
     }),
-    [],
+    []
   );
 
   return (
     <NavigationContainer
       style={{
-        backgroundColor: '#e8ebee',
-      }}>
+        backgroundColor: "#e8ebee",
+      }}
+    >
       <AuthContext.Provider value={authContext}>
         <Stack.Navigator
-          headerMode="screen"
-          initialRouteName="Auth"
+          initialRouteName="Splash"
           screenOptions={{
-            headerTintColor: 'black',
-            headerStyle: {backgroundColor: 'white'},
-          }}>
+            headerShown: false,
+          }}
+        >
           {state.userToken == null ? (
-            <Stack.Screen
-              name="Auth"
-              component={AuthenticateScreen}
-              options={{
-                headerShown: false,
-                animationTypeForReplace: state.isSignout ? 'pop' : 'push',
-              }}
-            />
+            <>
+              <Stack.Screen name="Splash" component={SplashScreen} />
+              <Stack.Screen name="Auth" component={AuthenticateScreen} />
+            </>
           ) : (
-            <Stack.Screen
-              name="Welcome"
-              component={MainPageDrawerNavigation}
-              options={{
-                headerLeft: () => <HeaderLeft />,
-              }}
-            />
+            <Stack.Screen name="Drawer" component={MainPageDrawerNavigation} />
           )}
         </Stack.Navigator>
       </AuthContext.Provider>

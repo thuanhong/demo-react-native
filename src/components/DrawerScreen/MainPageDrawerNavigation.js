@@ -1,12 +1,13 @@
-import React from 'react';
-import {useNavigation, DrawerActions} from '@react-navigation/native';
-import AppTabNavigation from '../TabNavigationScreen/AppTabNavigation';
-import ActivityLogScreen from '../ActivityLogScreen/ActivityLogScreen';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import CustomDrawerContent from './CustomDrawerContent';
-import {Provider} from 'mobx-react';
-import store from '../Store';
+import React from "react";
+import { useNavigation, DrawerActions } from "@react-navigation/native";
+import AppTabNavigation from "../TabNavigationScreen/AppTabNavigation";
+import ActivityLogScreen from "../ActivityLogScreen/ActivityLogScreen";
+import Profile from "../Profile/Profile";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import CustomDrawerContent from "./CustomDrawerContent";
+import { Provider } from "mobx-react";
+import store from "../Store";
 
 const Drawer = createDrawerNavigator();
 
@@ -27,9 +28,14 @@ const MainPageDrawerNavigation = () => {
   return (
     <Provider store={store}>
       <Drawer.Navigator
-        drawerContent={props => <CustomDrawerContent {...props} />}>
-        <Drawer.Screen name="Home" component={AppTabNavigation} />
+        drawerContent={(props) => <CustomDrawerContent {...props} />}
+      >
+        <Drawer.Screen name="Home" component={AppTabNavigation}  />
         <Drawer.Screen name="Activity" component={ActivityLogScreen} />
+        <Drawer.Screen
+          name="Profile"
+          component={Profile}
+        />
       </Drawer.Navigator>
     </Provider>
   );

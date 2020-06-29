@@ -1,10 +1,13 @@
 import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import { createStackNavigator } from "@react-navigation/stack";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeScreen from './HomeScreen/HomeScreen';
 import SettingScreen from './SettingScreen/SettingScreen';
+import {HeaderLeft} from '../DrawerScreen/MainPageDrawerNavigation';
 
 const Tab = createMaterialTopTabNavigator();
+const Stack = createStackNavigator();
 
 const AppTabNavigation = () => {
   return (
@@ -38,4 +41,17 @@ const AppTabNavigation = () => {
   );
 };
 
-export default AppTabNavigation;
+const StackAppTabNavigation = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        title: 'Home Screen',
+        headerLeft: () => <HeaderLeft/>
+      }}
+    >
+      <Stack.Screen name="StackTab" component={AppTabNavigation} />
+    </Stack.Navigator>
+  );
+}
+
+export default StackAppTabNavigation;
