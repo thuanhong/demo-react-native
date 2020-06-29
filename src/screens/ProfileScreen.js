@@ -2,21 +2,18 @@ import React from "react";
 import {
   View,
   Text,
-  TouchableNativeFeedback,
   StyleSheet,
   Dimensions,
 } from "react-native";
 import Animated from "react-native-reanimated";
-import { useNavigation, DrawerActions } from "@react-navigation/native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import HeaderLeft from '../components/HeaderLeft'
 
 
 const HEIGHT_SCREEN = Dimensions.get("window").height;
 
-const { Value, timing, interpolate, concat, event, add, multiply } = Animated;
+const { Value, interpolate, event, add, multiply } = Animated;
 
 const  Profile = () => {
-  const navigation = useNavigation();
   let coordianateY = new Value(0);
   onScrollHandler = event([
     {
@@ -104,19 +101,6 @@ const  Profile = () => {
     </View>
   );
 }
-
-const HeaderLeft = () => {
-  const navigation = useNavigation();
-  return (
-    <MaterialCommunityIcons.Button
-      name="menu"
-      size={25}
-      onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-      backgroundColor="transparent"
-      color="#5F6870"
-    />
-  );
-};
 
 
 const styles = StyleSheet.create({

@@ -11,7 +11,7 @@ const CardComponent = props => {
       <View style={styles.listTile}>
         <View style={styles.imgContainer}>
           <Image
-            source={require('../../../../../assets/react-native-logo.png')}
+            source={require('../../assets/react-native-logo.png')}
             style={styles.img}
           />
         </View>
@@ -38,7 +38,7 @@ const CardComponent = props => {
           style={{
             width: width,
           }}
-          source={require('../../../../../assets/im.jpg')}
+          source={require('../../assets/im.jpg')}
         />
       </View>
       <View

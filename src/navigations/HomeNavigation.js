@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import NewFeedScreen from './NewFeedScreen/NewFeedScreen';
-import CommentScreen from './CommentScreen/CommentScreen';
+import NewFeedScreen from '../screens/NewFeedScreen';
+import CommentScreen from '../screens/CommentScreen';
 
 
 const Stack = createStackNavigator();

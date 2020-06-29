@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {AuthContext} from '../../App';
+import {AuthContext} from '../providers/AuthContext';
 
 const width = Dimensions.get('window').width;
 
@@ -29,13 +29,13 @@ const AuthenticateScreen = () => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <ImageBackground
-        source={require('../../../assets/background.png')}
+        source={require('../../assets/background.png')}
         style={styles.imgBackground}>
         <TouchableWithoutFeedback behavior={Platform.OS ? 'padding' : 'height'}>
           <View style={styles.inner}>
             <View style={styles.imgContainer}>
               <Image
-                source={require('../../../assets/react-native-logo.png')}
+                source={require('../../assets/react-native-logo.png')}
                 style={styles.logo}
               />
             </View>

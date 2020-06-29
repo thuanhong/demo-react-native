@@ -2,9 +2,9 @@ import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import { createStackNavigator } from "@react-navigation/stack";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import HomeScreen from './HomeScreen/HomeScreen';
-import SettingScreen from './SettingScreen/SettingScreen';
-import {HeaderLeft} from '../DrawerScreen/MainPageDrawerNavigation';
+import HomeScreen from './HomeNavigation';
+import SettingScreen from '../screens/SettingScreen';
+import HeaderLeft from '../components/HeaderLeft'
 
 const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();

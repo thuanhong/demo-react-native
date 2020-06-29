@@ -7,7 +7,7 @@ const ActivityLogItem = props => {
     <View style={styles.item}>
       <Image
         style={styles.img}
-        source={require('../../../assets/avartar.png')}
+        source={require('../../assets/avartar.png')}
       />
       <View style={{width: '80%'}}>
         <Text numberOfLines={3} style={styles.content}>

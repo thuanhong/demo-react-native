@@ -1,7 +1,7 @@
 import React from 'react';
 import {FlatList, SafeAreaView} from 'react-native';
-import CardComment from './CardComment';
-import InputCommentComponent from './InputCommentComponent';
+import CardComment from '../components/CardComment';
+import InputCommentComponent from '../components/InputCommentComponent';
 
 const CommentScreen = ({route}) => {
   return (

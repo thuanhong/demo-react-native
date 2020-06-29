@@ -1,8 +1,8 @@
 import React from 'react';
 import {FlatList, SafeAreaView} from 'react-native';
-import CardComponent from './CardComponent';
+import CardComponent from '../components/CardComponent';
 
-const DATA = require('../../../../../assets/MOCK_DATA.json');
+const DATA = require('../../assets/MOCK_DATA.json');
 
 const NewFeedScreen = () => {
   return (

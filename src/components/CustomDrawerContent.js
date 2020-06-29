@@ -4,7 +4,7 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import {Image, Button} from 'react-native';
-import {AuthContext} from '../../App';
+import {AuthContext} from '../providers/AuthContext';
 
 const CustomDrawerContent = props => {
   const {signOut} = useContext(AuthContext);
@@ -12,7 +12,7 @@ const CustomDrawerContent = props => {
     <DrawerContentScrollView {...props}>
       <Image
         style={{resizeMode: 'stretch', width: '100%', height: 200}}
-        source={require('../../../assets/drawer.jpg')}
+        source={require('../../assets/drawer.jpg')}
       />
       <DrawerItemList {...props} />
       <Button title="Logout" onPress={signOut} />

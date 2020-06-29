@@ -1,12 +1,12 @@
 import React, { useMemo, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import AuthenticateScreen from "./components/Auth/AuthenticateScreen.js";
+import AuthenticateScreen from "./screens/AuthenticateScreen.js";
 import AsyncStorage from "@react-native-community/async-storage";
-import MainPageDrawerNavigation from "./components/DrawerScreen/MainPageDrawerNavigation";
-import SplashScreen from "./components/SplashScreen";
+import MainPageDrawerNavigation from "./navigations/MainPageDrawerNavigation";
+import SplashScreen from "./screens/SplashScreen";
+import {AuthContext} from './providers/AuthContext';
 
-export const AuthContext = React.createContext();
 
 const Stack = createStackNavigator();
 

@@ -6,7 +6,7 @@ const CardComment = ({name, comment}) => {
     <View style={styles.comment}>
       <Image
         style={styles.commentatorImg}
-        source={require('../../../../../assets/avartar.png')}
+        source={require('../../assets/avartar.png')}
       />
       <View style={styles.commentContent}>
         <Text style={styles.commentatorName}>{name}</Text>

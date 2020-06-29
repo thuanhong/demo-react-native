@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import { StyleSheet, View , Text} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
-import SquareRotate from "./Animations/SquareRotate";
+import SquareRotate from "../animations/SquareRotate";
 
 const SplashScreen = () => {
   const navigation = useNavigation();
