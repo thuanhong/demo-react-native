@@ -93,14 +93,14 @@ const App = () => {
     >
       <AuthContext.Provider value={authContext}>
         <Stack.Navigator
-          initialRouteName="Splash"
+          // initialRouteName="Splash"
           screenOptions={{
             headerShown: false,
           }}
         >
-          {state.userToken != null ? (
+          {state.userToken == null ? (
             <>
-              <Stack.Screen name="Splash" component={SplashScreen} />
+              {/* <Stack.Screen name="Splash" component={SplashScreen} /> */}
               <Stack.Screen name="Auth" component={AuthenticateScreen} />
             </>
           ) : (

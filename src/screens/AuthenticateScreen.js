@@ -1,7 +1,6 @@
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext, useEffect } from "react";
 import {
   View,
-  KeyboardAvoidingView,
   TextInput,
   StyleSheet,
   TouchableWithoutFeedback,
@@ -11,31 +10,46 @@ import {
   ImageBackground,
   Dimensions,
   Text,
-} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {AuthContext} from '../providers/AuthContext';
+} from "react-native";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { AuthContext } from "../providers/AuthContext";
+import { observer, useLocalStore } from "mobx-react-lite";
+import KeyBoardShift from "../components/KeyBoardShift";
 
-const width = Dimensions.get('window').width;
 
-const AuthenticateScreen = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const width = Dimensions.get("window").width;
 
-  const [visible, setVisible] = useState(true);
+const AuthenticateScreen = observer(() => {
 
-  const {signIn} = useContext(AuthContext);
+  const { signIn } = useContext(AuthContext);
+
+  const textInputValue = useLocalStore(() => ({
+    username: '',
+    password: '',
+    visible: true,
+    setUsername: value => {
+      textInputValue.username = value
+    },
+    setPassword: value => {
+      textInputValue.password = value
+    },
+    setVisible: () => {
+      textInputValue.visible = !textInputValue.visible
+    }
+  }));
 
   return (
-    <KeyboardAvoidingView style={styles.container}>
-      <ImageBackground
-        source={require('../../assets/background.png')}
-        style={styles.imgBackground}>
-        <TouchableWithoutFeedback behavior={Platform.OS ? 'padding' : 'height'}>
+    <KeyBoardShift>
+{   () =>   (<ImageBackground
+        source={require("../../assets/background.png")}
+        style={styles.imgBackground}
+      >
+        <TouchableWithoutFeedback behavior={Platform.OS ? "padding" : "height"}>
           <View style={styles.inner}>
             <View style={styles.imgContainer}>
               <Image
-                source={require('../../assets/react-native-logo.png')}
+                source={require("../../assets/react-native-logo.png")}
                 style={styles.logo}
               />
             </View>
@@ -43,27 +57,25 @@ const AuthenticateScreen = () => {
               <View style={styles.inputContainer}>
                 <TextInput
                   placeholder="Username"
-                  onChangeText={setUsername}
+                  onChangeText={textInputValue.setUsername}
                   style={styles.input}
-                  value={username}
+                  // value={textInputValue.username}
                   placeholderTextColor="white"
                 />
               </View>
               <View style={styles.inputContainer}>
                 <TextInput
                   placeholder="Password"
-                  onChangeText={setPassword}
+                  onChangeText={textInputValue.setPassword}
                   style={styles.input}
-                  value={password}
-                  secureTextEntry={visible}
+                  // value={textInputValue.password}
+                  secureTextEntry={textInputValue.visible}
                   placeholderTextColor="white"
                   place
                 />
-                <TouchableWithoutFeedback
-                  onPress={() => setVisible(!visible)}
-                  >
+                <TouchableWithoutFeedback onPress={textInputValue.setVisible}>
                   <MaterialCommunityIcons
-                    name={visible ? 'eye-off' : 'eye'}
+                    name={textInputValue.visible ? "eye-off" : "eye"}
                     size={25}
                     style={styles.visibleIcon}
                   />
@@ -73,11 +85,12 @@ const AuthenticateScreen = () => {
             <View style={styles.buttonLogin}>
               <TouchableOpacity
                 style={styles.navigateBtn}
-                onPress={() => signIn({username, password})}>
+                onPress={() => signIn({ username: textInputValue.username, password: textInputValue.password })}
+              >
                 <Text style={styles.btnTextStyle}>Login</Text>
               </TouchableOpacity>
               <View style={styles.btnGroupAuth}>
-                <TouchableOpacity style={styles.btnGroupAuth__btn}>
+                <TouchableOpacity style={styles.btnGroupAuth__btn} onPress={() => console.log(textInputValue.username, textInputValue.password)}>
                   <AntDesign name="google" size={22} color="white" />
                 </TouchableOpacity>
                 <View style={styles.space} />
@@ -92,10 +105,10 @@ const AuthenticateScreen = () => {
             </View>
           </View>
         </TouchableWithoutFeedback>
-      </ImageBackground>
-    </KeyboardAvoidingView>
+      </ImageBackground>)}
+    </KeyBoardShift>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -103,70 +116,70 @@ const styles = StyleSheet.create({
   },
   inner: {
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: "space-around",
     paddingHorizontal: 20,
     paddingTop: 40,
   },
   imgContainer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   logo: {
     width: width * 0.7,
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
   form: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   inputContainer: {
-    position: 'relative',
+    position: "relative",
   },
   input: {
     paddingVertical: 15,
-    borderBottomColor: 'white',
+    borderBottomColor: "white",
     borderBottomWidth: 1,
-    color: 'white',
+    color: "white",
     marginVertical: 20,
     fontSize: 20,
   },
   imgBackground: {
     flex: 1,
-    resizeMode: 'cover',
-    justifyContent: 'center',
+    resizeMode: "cover",
+    justifyContent: "center",
   },
   buttonLogin: {
     flex: 1,
   },
   navigateBtn: {
-    backgroundColor: '#F40054',
+    backgroundColor: "#F40054",
     padding: 15,
     borderRadius: 30,
   },
   btnTextStyle: {
-    color: 'white',
+    color: "white",
     fontSize: 20,
-    textAlign: 'center',
+    textAlign: "center",
   },
   btnGroupAuth: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginTop: 20,
   },
   btnGroupAuth__btn: {
     borderRadius: 30,
-    borderColor: 'white',
+    borderColor: "white",
     borderWidth: 1,
     padding: 12,
     flex: 3,
-    alignItems: 'center',
+    alignItems: "center",
   },
   space: {
     flex: 1,
   },
   visibleIcon: {
-    position: 'absolute',
+    position: "absolute",
     right: 0,
     bottom: 30,
   },

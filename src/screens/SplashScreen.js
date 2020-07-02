@@ -5,8 +5,7 @@ import LinearGradient from "react-native-linear-gradient";
 import SquareRotate from "../animations/SquareRotate";
 
 const SplashScreen = () => {
-  const navigation = useNavigation();
-  // navigation.replace('Auth')
+  const navigation = useNavigation(); 
   useEffect(() => {
     setTimeout(() => navigation.replace('Auth'), 5000)
   }, [])

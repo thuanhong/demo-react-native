@@ -1,11 +1,13 @@
 import React from "react";
 import { FlatList, SafeAreaView, StyleSheet, View, Text } from "react-native";
-import { inject, observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import ActivityLogItem from "../components/ActivityLogItem";
 import HeaderLeft from "../components/HeaderLeft";
+import {useStores} from '../hooks/useStores';
 
-const ActivityLogScreen = (props) => {
-  const { log } = props.store;
+const ActivityLogScreen = observer(() => {
+  // const { log } = props.store;
+  const { log } = useStores().activityStore;
   return (
     <SafeAreaView>
       <View style={styles.headerStyle}>
@@ -22,7 +24,7 @@ const ActivityLogScreen = (props) => {
       />
     </SafeAreaView>
   );
-};
+});
 
 const styles = StyleSheet.create({
   headerStyle: {
@@ -50,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject("store")(observer(ActivityLogScreen));
+export default ActivityLogScreen;

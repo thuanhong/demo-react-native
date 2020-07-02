@@ -10,7 +10,6 @@ class ObservableStore {
 
   @action updateLog = newLog => {
     this.log.push(newLog);
-    console.log(this.log);
   };
 
   @action removeSpecifyLogItem = id => {
@@ -18,5 +17,4 @@ class ObservableStore {
   };
 }
 
-const observableStore = new ObservableStore();
-export default observableStore;
+export default ObservableStore;

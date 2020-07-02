@@ -75,7 +75,7 @@ const  Profile = () => {
         <View style={{ flex: 1 }}></View>
       </Animated.View>
       <Animated.Image
-        source={{uri: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg'}}
+        source={require('../../assets/avartar.png')}
         style={[
           styles.bigImg,
           {

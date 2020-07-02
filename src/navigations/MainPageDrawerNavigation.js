@@ -4,17 +4,16 @@ import ActivityLogScreen from "../screens/ActivityLogScreen";
 import Profile from "../screens/ProfileScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import CustomDrawerContent from "../components/CustomDrawerContent";
-import { Provider } from "mobx-react";
-import store from "../providers/Store";
+import {storesContext, store} from '../contexts';
 
 const Drawer = createDrawerNavigator();
 
 const MainPageDrawerNavigation = () => {
   return (
-    <Provider store={store}>
+    <storesContext.Provider value={store}>
       <Drawer.Navigator
         drawerContent={(props) => <CustomDrawerContent {...props} />}
-      >
+      > 
         <Drawer.Screen name="Home" component={AppTabNavigation}  />
         <Drawer.Screen name="Activity" component={ActivityLogScreen} />
         <Drawer.Screen
@@ -22,7 +21,7 @@ const MainPageDrawerNavigation = () => {
           component={Profile}
         />
       </Drawer.Navigator>
-    </Provider>
+    </storesContext.Provider>
   );
 };
 

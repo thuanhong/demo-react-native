@@ -7,12 +7,13 @@ import {
   Dimensions,
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {inject, observer} from 'mobx-react';
+import { observer } from 'mobx-react-lite';
+import useStores from '../hooks/useStores';
 
-const InputCommentComponent = props => {
+const InputCommentComponent = observer(props => {
   const myTextInput = React.createRef();
   const {item} = props;
-  const {updateLog} = props.store;
+  const {updateLog} = useStores();
   return (
     <View style={styles.inputComment}>
       <TextInput
@@ -35,7 +36,7 @@ const InputCommentComponent = props => {
       </TouchableOpacity>
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   inputComment: {
@@ -57,4 +58,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('store')(observer(InputCommentComponent));
+export default InputCommentComponent;
